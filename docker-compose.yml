@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  phpdebug:
+    image: phpdebug
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9003 remote_enable=1
+    container_name: phpdebug
+    command: php -c php.ini -S 0.0.0.0:80
+    ports:
+      - 8080:80
+    volumes:
+      - ./app:/app
